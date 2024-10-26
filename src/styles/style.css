@@ -1,0 +1,77 @@
+* {
+    padding: 0;
+    margin: 0;
+    vertical-align: baseline;
+    list-style: none;
+    border: 0;
+    box-sizing: border-box;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: #33312d;
+
+}
+
+body {
+    background-color: #847e74;
+    
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+
+main {
+    background-color: #ffffff;
+
+    max-width: 80vw;
+
+    padding: 16px;
+
+    border-radius: 6px;
+    
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+}
+
+form {
+    width: 200px;
+    height: 160px;
+    padding: 8px;
+
+    border: dashed 3px #78746c;
+    border-radius: 6px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form input[type=file] {
+    display: none;
+}
+form label {
+    cursor: pointer;
+}
+form:hover {
+    background-color: #ccc4b92e;
+}
+
+.wrp-img img {
+    width: 200px;
+}
