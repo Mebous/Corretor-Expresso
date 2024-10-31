@@ -26,7 +26,22 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+document.querySelector('#btn_download_model_spreadsheets').addEventListener('click', () => {
+    // Caminho do arquivo no seu projeto (ajuste conforme necessário)
+    const caminhoArquivo = '../spreadsheets/gabarito_modelo.xlsx';
 
+    // Função para ler o arquivo e criar um Blob
+    fetch(caminhoArquivo)
+    .then(response => response.arrayBuffer())
+    .then(arrayBuffer => {
+        const blob = new Blob([arrayBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet ' });
+        const fileName = 'gabarito_modelo.xlsx'; // Nome do arquivo a ser exibido no download
+        saveAs(blob, fileName)
+    })
+    .catch(error => {
+        console.error('Erro ao baixar o arquivo:', error);
+    });
+})
 
 formTestAnswers.querySelector('input').addEventListener('change', (event) => {
     formTestAnswers.dispatchEvent(new Event('submit', { cancelable: true }))

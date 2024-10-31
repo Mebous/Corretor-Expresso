@@ -25,7 +25,7 @@ body {
 }
 
 
-main {
+main, section {
     background-color: #ffffff;
 
     max-width: 80vw;
@@ -69,9 +69,21 @@ form label {
     cursor: pointer;
 }
 form:hover {
-    background-color: #ccc4b92e;
+    background-color: #ccc7bf;
 }
 
 .wrp-img img {
     width: 200px;
+}
+
+section {
+    cursor: pointer;
+
+}
+section:hover {
+    background-color: #ccc7bf;
+}
+button {
+    background-color: transparent;
+    cursor: pointer;
 }
