@@ -1,5 +1,5 @@
 # Automated-Multiple-Choice-Exam-Grading-System
-Grade your exams automatically and see the results in a flash.
+Corrija suas provas automaticamente e veja os resultados em um piscar de olhos.
 
 # Corretor de Provas de Múltipla Escolha
 
