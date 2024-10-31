@@ -1,24 +1,24 @@
 # Automated-Multiple-Choice-Exam-Grading-System
 Grade your exams automatically and see the results in a flash.
 
-# Multiple Choice Exam Grader
+# Corretor de Provas de Múltipla Escolha
 
-This project aims to simplify the grading of multiple-choice exams. Using a template spreadsheet, the user inputs the correct answers and the students' answers. The system processes this information and generates a new spreadsheet with:
+Este projeto tem como objetivo simplificar a correção de provas de múltipla escolha. Usando uma planilha modelo, o usuário insere as respostas corretas e as respostas dos alunos. O sistema processa essas informações e gera uma nova planilha com:
 
-- **Individual Grades**: Each student's score on the exam.
-- **Class Average**: The average score of the class.
-- **Most Missed Questions**: A ranking of the questions that most students got wrong.
-- **(Future) Graphs**: A clearer and more intuitive visualization of the results _(under development)_.
+- **Notas Individuais**: A pontuação de cada aluno na prova.
+- **Média da Turma**: A média das notas da turma.
+- **(Futuro) Questões Mais Erradas**: Um ranking das questões que mais alunos erraram _(em desenvolvimento)_.
+- **(Futuro) Gráficos**: Uma visualização mais clara e intuitiva dos resultados _(em desenvolvimento)_.
 
-## How It Works
+## Como Funciona
 
-1. **Filling Out the Spreadsheet**: The user downloads the template spreadsheet and fills it with the exam data.
-2. **Uploading the Spreadsheet**: The completed spreadsheet is uploaded to the system through the website.
-3. **Processing**: The system analyzes the data and generates the spreadsheet with the results.
-4. **Downloading the Spreadsheet**: The user downloads the new spreadsheet with the processed information.
+1. **Preenchimento da Planilha**: O usuário baixa a planilha modelo e a preenche com os dados da prova.
+2. **Envio da Planilha**: A planilha preenchida é enviada para o sistema através do site.
+3. **Processamento**: O sistema analisa os dados e gera a planilha com os resultados.
+4. **Download da Planilha**: O usuário baixa a nova planilha com as informações processadas.
 
-## Benefits
+## Benefícios
 
-- **Speed**: Automates the grading of exams, saving time.
-- **Accuracy**: Eliminates manual errors in grading.
-- **Analysis**: Allows you to identify students' difficulties and the most problematic questions.
+- **Rapidez**: Automatiza a correção de provas, economizando tempo.
+- **Precisão**: Elimina erros manuais na correção.
+- **Análise**: Permite identificar as dificuldades dos alunos e as questões mais problemáticas.
