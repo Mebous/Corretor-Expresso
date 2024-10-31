@@ -2,6 +2,7 @@ import { handleFileUpload } from "./utils/handle_file_upload.js"
 import { getSheetData } from "./utils/get_sheet_data.js"
 import { Student } from "./utils/student.js"
 import * as Style from "./utils/style_library.js"
+import { getExcelColumnLabel } from "./utils/get_exel_column_label.js"
 
 
 const formTestAnswers = document.querySelector('#get_unformatted_answer_keys')
@@ -185,14 +186,7 @@ function generateSpreadsheet(worksheetData) {
     return worksheet
 }
 
-function getExcelColumnLabel(columnIndex) {
-    if (columnIndex <= 26) {
-      return String.fromCharCode(64 + columnIndex);
-    } else {
-      return getExcelColumnLabel(Math.floor((columnIndex - 1) / 26)) +
-             String.fromCharCode(65 + ((columnIndex - 1) % 26));
-    }
-  }
+
 
 function saveFile(workbook) {
     // Gerando o arquivo Excel e baixando
