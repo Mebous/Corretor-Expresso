@@ -8,10 +8,10 @@
 
     <title>Formatador de Gabarito</title>
 
-    <script src="/node_modules/xlsx-js-style/dist/xlsx.bundle.js""></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <link rel="stylesheet" href="../src/styles/style.css">
 
-    <link rel="stylesheet" href="/src/styles/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="../node_modules/xlsx-js-style/dist/xlsx.bundle.js""></script>
 </head>
 <body>
     <main>
@@ -21,13 +21,13 @@
                 <input type="file" name="file_unformatted_answer_keys" accept=".xlsx" required>
             </label>
         </form>
-        <div class="wrp-img"><img src="/imgs/coffee_cat.jpeg" alt="" srcset=""></div>
+        <div class="wrp-img"><img src="../imgs/coffee_cat.jpeg" alt="" srcset=""></div>
     </main>
 
     <section id="btn_download_model_spreadsheets">
         <button>Baixar Gabarito Modelo</button>
     </section>
 
-    <script type="module" src="/src/index.js"></script>
+    <script type="module" src="../src/index.js"></script>
 </body>
 </html>
