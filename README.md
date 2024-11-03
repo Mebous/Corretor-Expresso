@@ -1,4 +1,4 @@
-# Automated-Multiple-Choice-Exam-Grading-System
+# Corretor Expresso
 Corrija suas provas automaticamente e veja os resultados em um piscar de olhos.
 
 # Corretor de Provas de Múltipla Escolha
