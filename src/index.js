@@ -4,6 +4,7 @@ import { Student } from "./components/student.js"
 import * as Style from "./components/style_library.js"
 import { getExcelColumnLabel } from "./components/get_exel_column_label.js"
 
+const XLSX = require('xlsx-js-style')
 
 const formTestAnswers = document.querySelector('#get_unformatted_answer_keys')
 let fileWorkbook
