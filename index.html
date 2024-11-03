@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../imgs/grao-de-cafe.ico" type="image/x-icon">
+    <link rel="shortcut icon" type="imagex/png" href="../imgs/icone_colorido.ico">
+
+    <title>Corretor Expresso</title>
+
+    <link rel="stylesheet" href="../src/styles/style.css">
+    <link rel="stylesheet" href="../src/styles/backgrond_animated.css">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="../node_modules/xlsx-js-style/dist/xlsx.bundle.js""></script>
+</head>
+<body>
+    <div class="switch_background">
+        <span>Chocolate quente</span>
+    </div>
+    
+    <main class="white_box">
+        <header>
+            <div class="wrp-explanation_box">
+                <h2>Pegue um café e Relaxe</h2>
+                <div>
+                    Com nosso ferramenta, você pode criar gabaritos de provas de múltipla escolha de forma fácil e rápida.
+                    <br>
+                    <br>
+                    Basta preencher o gabarito com as respostas corretas e enviar. Em poucos segundos, você receberá um relatório completo com as notas, médias e o desempenho de cada aluno.
+                </div>
+            </div>
+            <div class="wrp-img"><img src="../imgs/coffee_cat.jpeg" alt="" srcset=""></div>
+        </header>
+        <section>
+            <div class="wrp-warning_field">
+                <h3>⚠️ Atenção</h3>
+                <p>
+                    O gabarito modelo é essencial para que o sistema reconheça a estrutura do seu documento e realize a formatação corretamente.
+                </p>
+            </div>
+    
+            <div class="wrp-btns">
+                <button class="box_file btn_style " id="btn_download_model_spreadsheet">Baixar Modelo</button>
+    
+                <div class="box_file">
+                    <form action="" id="get_unformatted_answer_keys">
+                        <label>
+                            <p class="btn_style">Enviar Gabarito</p>
+                            <input type="file" name="file_unformatted_answer_keys" accept=".xlsx" required>
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="area" >
+        <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+        </ul>
+    </div >
+    <script type="module" src="../src/index.js"></script>
+</body>
+</html>
