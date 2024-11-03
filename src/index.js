@@ -1,30 +1,40 @@
-import { handleFileUpload } from "./utils/handle_file_upload.js"
-import { getSheetData } from "./utils/get_sheet_data.js"
-import { Student } from "./utils/student.js"
-import * as Style from "./utils/style_library.js"
-import { getExcelColumnLabel } from "./utils/get_exel_column_label.js"
+import { handleFileUpload } from "./components/handle_file_upload.js"
+import { getSheetData } from "./components/get_sheet_data.js"
+import { Student } from "./components/student.js"
+import * as Style from "./components/style_library.js"
+import { getExcelColumnLabel } from "./components/get_exel_column_label.js"
 
 
 const formTestAnswers = document.querySelector('#get_unformatted_answer_keys')
 let fileWorkbook
 var file
 
-
-document.addEventListener('keydown', (event) => {
-    if (event.code === 'Space') {
-        fetch("../spreadsheets/Modelo de Gabarito Street Fighter.xlsx")
-        .then(response => response.blob())  // Converta a resposta em um blob (arquivo)
-        .then(blob => {
-            file = new File([blob], 'arquivo.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-                return handleFileUpload(file);  // Chame sua função com o "file"
-        })
-        .then(workbook => {
-            fileWorkbook = workbook;
-            startHandle();
-        })
-        .catch(error => console.error('Erro ao carregar o arquivo:', error));
+const coffees = [
+    ["Café forte", '#331907'],
+    ["Café com especiarias", '#800000'],
+    ["Expresso", '#663300'],
+    ["Chocolate quente", '#5C3317'],
+    ["Mocha", '#4B3828'],
+    ["Café com chocolate", '#8B6969'],
+    ["Cappuccino", '#B4A486'],
+    ["Café com leite", '#D1C4A9'],
+]
+let i = 0
+document.querySelector(".switch_background").addEventListener('click', (event) => {
+    if (i < coffees.length-1) {
+        i++
     }
-});
+    else {
+        i = 0
+    }
+    switchBackground()
+})
+
+function switchBackground () {
+    document.querySelector('.switch_background > span').innerHTML = coffees[i][0]
+    document.querySelector('.area').style.setProperty('--backgrond_color', coffees[i][1])
+}
+
 
 document.querySelector('#btn_download_model_spreadsheet').addEventListener('click', () => {
     // Caminho do arquivo no seu projeto (ajuste conforme necessário)
@@ -224,3 +234,20 @@ function formatFileName(fileName) {
     
     return formattedName + '_';  // Adiciona o underscore no final
 }
+
+
+// document.addEventListener('keydown', (event) => {
+//     if (event.code === 'Space') {
+//         fetch("../spreadsheets/Modelo de Gabarito Street Fighter.xlsx")
+//         .then(response => response.blob())  // Converta a resposta em um blob (arquivo)
+//         .then(blob => {
+//             file = new File([blob], 'arquivo.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+//                 return handleFileUpload(file);  // Chame sua função com o "file"
+//         })
+//         .then(workbook => {
+//             fileWorkbook = workbook;
+//             startHandle();
+//         })
+//         .catch(error => console.error('Erro ao carregar o arquivo:', error));
+//     }
+// });

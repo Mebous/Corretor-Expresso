@@ -6,9 +6,10 @@
     border: 0;
     box-sizing: content-box;
 
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', 'Exo', Courier, monospace;
     font-weight: bold;
     color: #33312d;
+    
 
 }
 
