@@ -56,8 +56,6 @@ document.querySelector('#btn_download_model_spreadsheet').addEventListener('clic
 formTestAnswers.querySelector('input').addEventListener('change', (event) => {
     formTestAnswers.dispatchEvent(new Event('submit', { cancelable: true }))
     
-    //Tratamento CSS
-    formTestAnswers.querySelector('span').innerHTML = event.target.files[0].name
 })
 formTestAnswers.addEventListener('submit', (event) => {
     event.preventDefault()
