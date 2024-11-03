@@ -26,7 +26,7 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-document.querySelector('#btn_download_model_spreadsheets').addEventListener('click', () => {
+document.querySelector('#btn_download_model_spreadsheet').addEventListener('click', () => {
     // Caminho do arquivo no seu projeto (ajuste conforme necessário)
     const caminhoArquivo = '../spreadsheets/gabarito_modelo.xlsx';
 
@@ -105,7 +105,7 @@ function refineData(rawData, title) {
     //Gabarito
     const answerKey = new Student(rawData[2][0], [rawData[rowNumbers], rawData[rowDisciplines], rawData[rowAnswerKey]])
    
-    let header = ['Nomes', `Precisão\nGeral`, `Acertos\nGeral`, `Total\nGeral`]
+    let header = ['Nomes', `Precisão Em\nGeral`, `Acertos\nGeral`, `Total\nGeral`]
     for (
         let j = 0;
         j < answerKey.disciplines.length;
@@ -126,8 +126,6 @@ function refineData(rawData, title) {
         i++
     ) {
         let student = new Student(rawData[i][0], [rawData[rowNumbers], rawData[rowDisciplines], rawData[i]])
-
-        
 
         let overallPrecision = 0
         let overallScore = 0
@@ -214,7 +212,7 @@ function saveFile(workbook) {
     }
 
     const blob = new Blob([buffer], { type: 'application/octet-stream' });
-    saveAs(blob, `${formatFileName(file.name)}_refinado.xlsx`);
+    saveAs(blob, `${formatFileName(file.name)}_resultados.xlsx`);
 }
 
 function formatFileName(fileName) {
