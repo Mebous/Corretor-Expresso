@@ -218,15 +218,9 @@ function formatFileName(fileName) {
     return formattedName + '_';  // Adiciona o underscore no final
 }
 
-
+let degug = false
 let sPressed = false;
 let fPressed = false;
-let puta = false
-
-function puta(gozou) {
-    console.log(gozou);
-    
-}
 
 document.addEventListener('keydown', (event) => {
         if (event.key === 's') {
@@ -235,7 +229,7 @@ document.addEventListener('keydown', (event) => {
             fPressed = true;
         }
 
-        if (sPressed && fPressed) {
+        if (sPressed && fPressed && degug) {
             fetch("../assets/spreadsheets/Modelo de Gabarito Street Fighter.xlsx")
             .then(response => response.blob())  // Converta a resposta em um blob (arquivo)
             .then(blob => {
