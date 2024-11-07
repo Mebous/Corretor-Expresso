@@ -4,45 +4,36 @@ import { Student } from "./components/student.js"
 import * as Style from "./components/style_library.js"
 import { getExcelColumnLabel } from "./components/get_exel_column_label.js"
 
-const XLSX = require('xlsx-js-style')
 
 const formTestAnswers = document.querySelector('#get_unformatted_answer_keys')
 let fileWorkbook
 var file
 
-const coffees = [
-    ["Café forte", '#331907'],
-    ["Café com especiarias", '#800000'],
-    ["Expresso", '#663300'],
-    ["Chocolate quente", '#5C3317'],
-    ["Mocha", '#4B3828'],
-    ["Café com chocolate", '#8B6969'],
-    ["Cappuccino", '#B4A486'],
-    ["Café com leite", '#D1C4A9'],
-]
-let i = 0
-document.querySelector(".switch_background").addEventListener('click', (event) => {
-    if (i < coffees.length-1) {
+fetch('../assets/data/list_background_colors.json')
+    .then(response => response.json())
+    .then(data => {
+    const coffees = Object.entries(data)
+
+    let i = 0
+    document.querySelector(".switch_background").addEventListener('click', (event) => {
+        if (i < coffees.length - 1) {
         i++
-    }
-    else {
+        } else {
         i = 0
+        }
+        switchBackground();
+    });
+
+    function switchBackground() {
+        document.querySelector('.switch_background > span').innerHTML = coffees[i][0];
+        document.querySelector('.area').style.setProperty('--backgrond_color', coffees[i][1]);
     }
-    switchBackground()
-})
+});
 
-function switchBackground () {
-    document.querySelector('.switch_background > span').innerHTML = coffees[i][0]
-    document.querySelector('.area').style.setProperty('--backgrond_color', coffees[i][1])
-}
-
-
+//Função pra baixar a Planilha Modelo
 document.querySelector('#btn_download_model_spreadsheet').addEventListener('click', () => {
-    // Caminho do arquivo no seu projeto (ajuste conforme necessário)
-    const caminhoArquivo = '../spreadsheets/gabarito_modelo.xlsx';
-
     // Função para ler o arquivo e criar um Blob
-    fetch(caminhoArquivo)
+    fetch('../assets/spreadsheets/gabarito_modelo.xlsx')
     .then(response => response.arrayBuffer())
     .then(arrayBuffer => {
         const blob = new Blob([arrayBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet ' });
@@ -54,6 +45,8 @@ document.querySelector('#btn_download_model_spreadsheet').addEventListener('clic
     });
 })
 
+
+//Recebendo o Formulario
 formTestAnswers.querySelector('input').addEventListener('change', (event) => {
     formTestAnswers.dispatchEvent(new Event('submit', { cancelable: true }))
     
@@ -68,10 +61,9 @@ formTestAnswers.addEventListener('submit', (event) => {
     .then(workbook => {
         fileWorkbook = workbook
 
-        //Verificando Se o arrivo tem pelo menos mais de um linha na platilha
-        if (getSheetData(0, fileWorkbook).filter((_, index) => index != 0).length <= 1) {
+        //Verificando Se o arrivo tem pelo menos mais de 4 linha na platilha
+        if (getSheetData(0, fileWorkbook).filter((_, index) => index != 0).length <= 4) {
             alert("Arquivo Irregular!")
-    
             setTimeout(() => {
                 formTestAnswers.querySelector('input').click();
             }, 100)
@@ -86,6 +78,7 @@ formTestAnswers.addEventListener('submit', (event) => {
     })
 })
 
+//Lidando com envio do formulario
 function startHandle () {
 
     // Criando o workbook e adicionando a planilha
@@ -99,8 +92,8 @@ function startHandle () {
         const worksheet = generateSpreadsheet(refineData(data, getSheetData(i, fileWorkbook)[0][0]))
         XLSX.utils.book_append_sheet(workbook, worksheet, fileWorkbook.SheetNames[i]);
     }
-    saveFile(workbook)
 
+    saveFile(workbook)
 }
 
 function refineData(rawData, title) {
@@ -114,7 +107,7 @@ function refineData(rawData, title) {
     //Gabarito
     const answerKey = new Student(rawData[2][0], [rawData[rowNumbers], rawData[rowDisciplines], rawData[rowAnswerKey]])
    
-    let header = ['Nomes', `Precisão Em\nGeral`, `Acertos\nGeral`, `Total\nGeral`]
+    let header = ['Nomes', `Precisão\nGeral`, `Acertos\nGeral`, `Total\nGeral`]
     for (
         let j = 0;
         j < answerKey.disciplines.length;
@@ -152,16 +145,12 @@ function refineData(rawData, title) {
 
             let score = discipline.rightQuestions.length
             let questions = discipline.answers.length
-            let precision = ((score / questions)).toFixed(2)
 
             headerByDiscipline.push('%', score, questions)
         
             overallScore += score
             overallQuestions += questions
         }
-        
-        overallPrecision = ((overallScore / overallQuestions)).toFixed(2)
-        
 
         const rowData = [student.name, '%', overallScore, overallQuestions].concat(headerByDiscipline)
         
@@ -175,13 +164,10 @@ function refineData(rawData, title) {
 }
 
 function generateSpreadsheet(worksheetData) {
-
-   
     let worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
     
 
     // Aplicar fórmulas e formatar a coluna de porcentagem como % (B)
-    
     for (
         let i = 3;
         i < worksheetData.length + 2;
@@ -202,12 +188,10 @@ function generateSpreadsheet(worksheetData) {
             }
         }
     }
-
+    
     worksheet = Style.stylize(worksheet, worksheetData)
-
     return worksheet
 }
-
 
 
 function saveFile(workbook) {
@@ -235,18 +219,41 @@ function formatFileName(fileName) {
 }
 
 
-// document.addEventListener('keydown', (event) => {
-//     if (event.code === 'Space') {
-//         fetch("../spreadsheets/Modelo de Gabarito Street Fighter.xlsx")
-//         .then(response => response.blob())  // Converta a resposta em um blob (arquivo)
-//         .then(blob => {
-//             file = new File([blob], 'arquivo.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-//                 return handleFileUpload(file);  // Chame sua função com o "file"
-//         })
-//         .then(workbook => {
-//             fileWorkbook = workbook;
-//             startHandle();
-//         })
-//         .catch(error => console.error('Erro ao carregar o arquivo:', error));
-//     }
-// });
+let sPressed = false;
+let fPressed = false;
+let puta = false
+
+function puta(gozou) {
+    console.log(gozou);
+    
+}
+
+document.addEventListener('keydown', (event) => {
+        if (event.key === 's') {
+            sPressed = true;
+        } else if (event.key === 'f') {
+            fPressed = true;
+        }
+
+        if (sPressed && fPressed) {
+            fetch("../assets/spreadsheets/Modelo de Gabarito Street Fighter.xlsx")
+            .then(response => response.blob())  // Converta a resposta em um blob (arquivo)
+            .then(blob => {
+                file = new File([blob], 'arquivo.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+                    return handleFileUpload(file);  // Chame sua função com o "file"
+            })
+            .then(workbook => {
+                fileWorkbook = workbook;
+                startHandle();
+            })
+            .catch(error => console.error('Erro ao carregar o arquivo:', error));
+        }
+    });
+
+    document.addEventListener('keyup', (event) => {
+    if (event.key === 's') {
+        sPressed = false;
+    } else if (event.key === 'f') {
+        fPressed = false;
+    }
+})

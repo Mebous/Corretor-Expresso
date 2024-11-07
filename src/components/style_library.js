@@ -41,8 +41,6 @@ export function stylize (worksheet, worksheetData) {
     }
 
     //Estilizando o Conteudo
-    console.log(worksheetData);
-    let puta = 0
     for (
         let i = 0;
         i < worksheetData[1].length+1;

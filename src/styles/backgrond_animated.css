@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
-
 /*
 Tons Escuros (do mais escuro para o mais claro):
 Café forte: #331907 (Quase preto)
@@ -15,8 +13,6 @@ Cappuccino: #B4A486 (Um marrom mais claro e quente)
 Café com leite: #D1C4A9 (Um bege mais claro)
 Café com creme: #E8D4C4 (Um bege mais claro ainda)
 Bege café: #F5F5DC (Quase branco)
-
-
 */
 
 :root {
@@ -46,7 +42,6 @@ Bege café: #F5F5DC (Quase branco)
     
     position: absolute;
     z-index: -1;
-   
 }
 
 .circles{
