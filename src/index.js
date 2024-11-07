@@ -97,12 +97,12 @@ function startHandle () {
 }
 
 function refineData(rawData, title) {
-
     const data = []
 
     const rowNumbers = 0
     const rowDisciplines = 1
     const rowAnswerKey = 2
+    
 
     //Gabarito
     const answerKey = new Student(rawData[2][0], [rawData[rowNumbers], rawData[rowDisciplines], rawData[rowAnswerKey]])
@@ -129,7 +129,6 @@ function refineData(rawData, title) {
     ) {
         let student = new Student(rawData[i][0], [rawData[rowNumbers], rawData[rowDisciplines], rawData[i]])
 
-        let overallPrecision = 0
         let overallScore = 0
         let overallQuestions = 0
 
@@ -159,7 +158,7 @@ function refineData(rawData, title) {
     
 
     const worksheetData = mainHeader.concat(data);
-
+    
     return worksheetData
 }
 

@@ -9,41 +9,26 @@ export class Student {
 }
 
 function create(rawData) {
-
     const rawNumbers = rawData[0].filter((_, index) => index !== 0);
     const rawDisciplines = rawData[1].filter((_, index) => index !== 0);
     const rawAnswrs = rawData[2].filter((_, index) => index !== 0);
-    
+
     const disciplines = [];
 
-    for (
-        let i = 0; 
-        i < rawDisciplines.length; 
-        i++
-    ) {
+    let i = 0;
+    while (i < rawDisciplines.length) {
         const element = rawDisciplines[i];
-        const discipline = new Discipline(element, [], [])
+        const discipline = new Discipline(element, [], []);
 
-        // Conta quantas vezes o elemento atual aparece consecutivamente
-        for (let j = i; 
-            j < rawDisciplines.length; 
-            j++
-        ) {
-            if (rawDisciplines[j] === element) {
-                discipline.answers.push(rawAnswrs[j]);
-                discipline.numbers.push(rawNumbers[j]);
-            } else {
-                disciplines.push(discipline); // Adiciona answers ao array disciplines
-                i = j - 1; // Ajusta o índice principal para pular as repetições já contadas
-                break; // Sai do loop se o elemento não for igual
-            }
+        // Armazena todas as respostas e números consecutivos para a mesma disciplina
+        while (i < rawDisciplines.length && rawDisciplines[i] === element) {
+            discipline.answers.push(rawAnswrs[i]);
+            discipline.numbers.push(rawNumbers[i]);
+            i++;
         }
 
-        // Se ainda houver repetições na última iteração
-        if (discipline.answers.length > 0 && i === rawDisciplines.length - 1) {
-            disciplines.push(discipline);
-        }
+        disciplines.push(discipline);  // Adiciona a disciplina após processar todas suas repetições
     }
 
-    return disciplines
+    return disciplines;
 }

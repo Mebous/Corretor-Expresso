@@ -16,7 +16,8 @@ export class Discipline {
             i++
         ) {
             let question = this.answers[i]
-            if (question == answerKey.answers[i]) {
+            
+            if (question == answerKey.answers[i] || answerKey.answers[i] == undefined) {
                 rightQuestions.push(question)
             }
         }
