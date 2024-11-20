@@ -1,3 +1,5 @@
+import * as XLSX from 'xlsx-js-style';
+
 export function getSheetData(page_number, workbook) {
     const sheetName = workbook.SheetNames[page_number]
     const worksheet = workbook.Sheets[sheetName]

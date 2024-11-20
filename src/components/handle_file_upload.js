@@ -1,3 +1,5 @@
+import * as XLSX from 'xlsx-js-style';
+
 export function handleFileUpload(file) {
     return new Promise((resolve, reject) => {
         // Verifica se o arquivo é do tipo esperado
