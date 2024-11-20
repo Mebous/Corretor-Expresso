@@ -16,7 +16,9 @@ fetch('../assets/data/list_background_colors.json')
     .then(data => {
     const coffees = Object.entries(data)
 
-    let i = 0
+    let i = getRandomArbitrary(0, coffees.length-1)
+    switchBackground();
+    
     document.querySelector(".switch_background").addEventListener('click', (event) => {
         if (i < coffees.length - 1) {
         i++
@@ -31,6 +33,10 @@ fetch('../assets/data/list_background_colors.json')
         document.querySelector('.area').style.setProperty('--backgrond_color', coffees[i][1]);
     }
 });
+
+function getRandomArbitrary(min, max) {
+    return parseInt(Math.random() * (max - min) + min)
+}
 
 //Função pra baixar a Planilha Modelo
 document.querySelector('#btn_download_model_spreadsheet').addEventListener('click', () => {
@@ -220,6 +226,7 @@ function formatFileName(fileName) {
 }
 
 let degug = false
+
 let sPressed = false;
 let fPressed = false;
 
@@ -228,9 +235,16 @@ document.addEventListener('keydown', (event) => {
             sPressed = true;
         } else if (event.key === 'f') {
             fPressed = true;
+        } else if (event.key === 'F12') {
+            degug = !degug;
         }
 
+        console.log(degug, sPressed, fPressed);
+        
+    
+
         if (sPressed && fPressed && degug) {
+            degug = false
             fetch("../assets/spreadsheets/Modelo de Gabarito Street Fighter.xlsx")
             .then(response => response.blob())  // Converta a resposta em um blob (arquivo)
             .then(blob => {
