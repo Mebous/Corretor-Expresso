@@ -16,12 +16,16 @@ export class Discipline {
             i++
         ) {
             let question = this.answers[i]
-            
-            if (question == answerKey.answers[i] || answerKey.answers[i] == undefined) {
-                rightQuestions.push(question)
+            if (question === answerKey.answers[i] || answerKey.answers[i] == undefined) {
+                
+                if (answerKey.answers[i] != undefined) {
+                    rightQuestions.push(question)
+                }
+                else {
+                    rightQuestions.push('Z')
+                }
             }
         }
-
         this.rightQuestions = rightQuestions
     }
 }

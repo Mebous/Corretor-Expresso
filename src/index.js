@@ -1,11 +1,12 @@
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx-js-style';
 
-import * as Style from "./components/style_library.js"
-import { handleFileUpload } from "./components/handle_file_upload.js"
 import { getSheetData } from "./components/get_sheet_data.js"
-import { Student } from "./components/student.js"
 import { getExcelColumnLabel } from "./components/get_exel_column_label.js"
+import { Student } from "./components/student.js"
+import { handleFileUpload } from "./components/handle_file_upload.js"
+
+import * as Style from "./components/style_library.js"
 
 const formTestAnswers = document.querySelector('#get_unformatted_answer_keys')
 let fileWorkbook
@@ -97,7 +98,10 @@ function startHandle () {
         i++
     ) {
         const data = getSheetData(i, fileWorkbook).filter((_, index) => index != 0)
-        const worksheet = generateSpreadsheet(refineData(data, getSheetData(i, fileWorkbook)[0][0]))
+        const title = getSheetData(i, fileWorkbook)[0][0] 
+
+        const worksheet = generateSpreadsheet(refineData(data, title))
+
         XLSX.utils.book_append_sheet(workbook, worksheet, fileWorkbook.SheetNames[i]);
     }
 
@@ -111,10 +115,9 @@ function refineData(rawData, title) {
     const rowDisciplines = 1
     const rowAnswerKey = 2
     
-
     //Gabarito
     const answerKey = new Student(rawData[2][0], [rawData[rowNumbers], rawData[rowDisciplines], rawData[rowAnswerKey]])
-   
+
     let header = ['Nomes', `Precisão\nGeral`, `Acertos\nGeral`, `Total\nGeral`]
     for (
         let j = 0;
@@ -130,6 +133,10 @@ function refineData(rawData, title) {
         header
     ]
 
+
+
+    //Vai rodar todos os Alunos
+    const numStudents = (rawData.length-(rowAnswerKey + 1))
     for (
         let i = rowAnswerKey + 1;
         i < rawData.length;
@@ -142,6 +149,8 @@ function refineData(rawData, title) {
 
         const headerByDiscipline = []
 
+
+        //Vai rodar todas as disciplinas do aluno
         for (
             let j = 0;
             j < student.disciplines.length;
@@ -154,25 +163,50 @@ function refineData(rawData, title) {
             let questions = discipline.answers.length
 
             headerByDiscipline.push('%', score, questions)
-        
+
             overallScore += score
             overallQuestions += questions
         }
 
-        const rowData = [student.name, '%', overallScore, overallQuestions].concat(headerByDiscipline)
-        
+        const rowData = [student.name, '%', overallScore, overallQuestions].concat(headerByDiscipline)        
         data.push(rowData)
     }
-    
 
-    const worksheetData = mainHeader.concat(data);
+    let footByD = []
     
+    let overR = 0
+    let overQ = 0
+    
+    //Vai rodar todas as disciplinas que exitem
+    for (let i = 0; i < answerKey.disciplines.length; i++) {
+        let allR = 0
+        let allQ = 0
+
+        //Vai rodar todos os alunos
+        for (let j = rowAnswerKey + 1; j < rawData.length; j++) {
+            let s = new Student(rawData[j][0], [rawData[rowNumbers], rawData[rowDisciplines], rawData[j]])
+            const d = s.disciplines[i];
+            d.validateAnswers(answerKey.disciplines[i])
+
+            allR += d.rightQuestions.length
+            allQ += d.answers.length
+        }
+        footByD.push('%', parseInt((allR)/numStudents), answerKey.disciplines[i].answers.length)
+
+        overR += allR
+        overQ += allQ
+    }
+    
+    const rowFooter = ["Média da Classe", '%', parseInt(overR/numStudents), parseInt(overQ/numStudents)].concat(footByD)
+    
+    data.push(rowFooter)
+    const worksheetData = mainHeader.concat(data)
+
     return worksheetData
 }
 
-function generateSpreadsheet(worksheetData) {
-    let worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-    
+function generateSpreadsheet(worksheetData) {    
+    let worksheet = XLSX.utils.aoa_to_sheet(worksheetData)
 
     // Aplicar fórmulas e formatar a coluna de porcentagem como % (B)
     for (

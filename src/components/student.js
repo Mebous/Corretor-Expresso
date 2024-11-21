@@ -6,6 +6,7 @@ export class Student {
         this.name = name;
         this.disciplines = create(rawData);
     }
+
 }
 
 function create(rawData) {
