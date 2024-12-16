@@ -1,6 +1,6 @@
 # Corretor Expresso
 Corrija suas provas automaticamente e veja os resultados em um piscar de olhos.
-/https://corretorexpresso.netlify.app/
+https://corretorexpresso.netlify.app/
 
 # Corretor de Provas de Múltipla Escolha
 
